@@ -1,10 +1,13 @@
 from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
+from uuid import UUID
 
 class Alert(BaseModel):
-    id: int
+    id: UUID
     timestamp: datetime
     source: str
-    threat_level: str  # "Low", "Medium", "High", "Critical"
+    threat_level: str
     description: Optional[str] = None
+    location: Optional[str] = None       
+    type: Optional[str] = None            

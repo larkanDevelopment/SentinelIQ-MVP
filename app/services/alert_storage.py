@@ -31,3 +31,17 @@ def load_alerts_from_file() -> List[Alert]:
     except Exception as e:
         logging.error(f"Failed to load alerts from file: {e}")
         return []
+
+def save_alert_to_file(alert: Alert) -> None:
+    try:
+        alerts = load_alerts_from_file()
+        alerts.append(alert)
+        with open(ALERTS_FILE, "w") as f:
+            json.dump(
+                [a.model_dump(mode="json") for a in alerts],
+                f,
+                indent=4
+            )
+        logging.info("Alert appended successfully.")
+    except Exception as e:
+        logging.error(f"Failed to append alert: {e}")
